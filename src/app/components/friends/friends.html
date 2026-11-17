@@ -1,0 +1,17 @@
+<section class="card" id="amis">
+<div class="icon">#</div>
+<div>
+<h2>Liste des amis</h2>
+<input
+  type="text"
+  placeholder="Rechercher un ami..."
+>
+<ul>
+@for(elt of friends; track elt.email) {
+  <li>
+    <strong>{{ elt.name }}</strong> - {{ elt.email }} - {{ elt.status }}
+  </li>
+}
+</ul>
+</div>
+</section>
