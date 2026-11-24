@@ -16,6 +16,12 @@
     <div class="conference-list">
       @for (conference of filteredConferences; track conference.id) {
         <div class="conference-card">
+          <div>
+    <h3>{{ conference.title }}</h3>
+    <button (click)="selectConference(conference)">
+      View details
+    </button>
+  </div>  
           <h3>{{ conference.title | uppercase }}</h3>
 
           <p>{{ conference.description }}</p>
@@ -28,7 +34,7 @@
             Participants :
             {{ conference.nbParticipants }} / {{ conference.maxParticipants }}
           </p>
-
+            
           <p
             class="remaining"
             [ngStyle]="{ color: getStatusColor(conference) }"
@@ -44,6 +50,12 @@
             {{ getRemainingPlaces(conference) <= 0 ? 'Complet' : "S'inscrire" }}
           </button>
         </div>
+        @if (selectedConference) {
+          <app-conference-detail
+            [conference]="selectedConference"
+            (registerEvent)="register($event)"
+          />
+}
       }
     </div>
   }

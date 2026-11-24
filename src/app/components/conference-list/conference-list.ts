@@ -2,20 +2,24 @@ import { Component } from '@angular/core';
 import type { Conference } from '../../models/conference';
 import { DatePipe, UpperCasePipe, NgClass, NgStyle } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ConferenceDetail } from './conference-detail/conference-detail';
+
 
 @Component({
   selector: 'app-conference-list',
   imports: [
-  DatePipe,
-  UpperCasePipe,
-  FormsModule,
-  NgClass,
-  NgStyle,
+    DatePipe,
+    UpperCasePipe,
+    FormsModule,
+    NgClass,
+    NgStyle,
+    ConferenceDetail
 ],
   templateUrl: './conference-list.html',
   styleUrl: './conference-list.css',
 })
 export class ConferenceList {
+  selectedConference: Conference | null = null;
   conferences: Conference[] = [
     {
       id: 1,
@@ -63,6 +67,7 @@ getRemainingPlaces(conference: Conference): number {
   return conference.maxParticipants - conference.nbParticipants;
 }
 
+
 getButtonClass(conference: Conference): string {
   const remaining = this.getRemainingPlaces(conference);
 
@@ -89,5 +94,8 @@ getStatusColor(conference: Conference): string {
   }
 
   return '#16a34a';
+}
+selectConference(conference: Conference) {
+  this.selectedConference = conference;
 }
 }
